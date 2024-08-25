@@ -1,0 +1,54 @@
+.header__menubar {
+  position: fixed;
+  top: 6%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #14ccff;
+  box-shadow: 0 0 10px rgb(172, 210, 209);
+  border-radius: 15px;
+  width: 80vw;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 35, 4, 0.568);
+  backdrop-filter: blur(20px);
+  z-index: 10;
+  transition: all 250ms lin;
+}
+
+.header__list {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.header__list > li {
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-weight: bolder;
+  transition: all 200ms linear;
+}
+
+.nolink {
+  color: white;
+  text-decoration: none;
+}
+
+.logo {
+  padding: 10px;
+  display: flex;
+  text-decoration: none;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  background-color: rgb(0, 234, 255);
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+}

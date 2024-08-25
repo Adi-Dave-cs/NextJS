@@ -1,0 +1,21 @@
+.activeTile {
+  display: block;
+  animation: changeOpacity 1s forwards linear;
+}
+.inActiveTile {
+  display: none;
+}
+
+.slider {
+  display: flex;
+  overflow: hidden;
+}
+
+@keyframes changeOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
