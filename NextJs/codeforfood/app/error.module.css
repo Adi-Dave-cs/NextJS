@@ -1,0 +1,17 @@
+.error {
+  font-size: 3rem;
+  margin: 0px;
+  font-weight: 900;
+  color: #262626;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, #2a2af9, #004b58);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: cover;
+  background-position: center;
+  font-family: "Montserrat", sans-serif;
+}
