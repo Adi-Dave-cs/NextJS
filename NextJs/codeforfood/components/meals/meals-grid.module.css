@@ -1,4 +1,5 @@
 .meals {
+  height: max-content;
   width: 90%;
   max-width: 90rem;
   display: grid;
