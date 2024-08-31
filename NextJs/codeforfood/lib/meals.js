@@ -34,7 +34,7 @@ export async function saveMeal(meals) {
       console.log("Saving image failed !!");
     }
   });
-  meals.image = `images/${filename}`;
+  meals.image = `/images/${filename}`;
 
   console.log(meals);
   db.prepare(
