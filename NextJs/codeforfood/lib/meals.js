@@ -1,7 +1,6 @@
 import sql from "better-sqlite3";
 import slugify from "slugify";
 import xss from "xss";
-import fetchImages from "./fetchImage";
 const fs = require("fs");
 const db = sql("meals.db");
 
