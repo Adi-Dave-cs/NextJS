@@ -7,8 +7,8 @@ function isInvalidText(text) {
   return !text || text.trim() === "";
 }
 
-function isValidEmail(emailId) {
-  const emailRegex = "/^[w.%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/";
+function isValidEmail(email) {
+  const emailRegex = /^[w.%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
   return emailRegex.test(email);
 }
 export async function shareMeal(formdata) {
