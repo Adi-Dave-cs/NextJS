@@ -2,12 +2,12 @@ import Todo from '@/models/todo';
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 
-export async function GET(request: NextRequest, params: { userId: string }) {
+export async function GET(request: NextRequest, params: { userid: string }) {
   try {
     await dbConnect();
-    const userId = params.userId;
+    const userid = params.userid;
 
-    const userTodos = await Todo.find({ userName: userId });
+    const userTodos = await Todo.find({ userName: userid });
 
     if (!userTodos)
       return NextResponse.json('No Todos to be found', { status: 404 });
@@ -22,14 +22,14 @@ export async function GET(request: NextRequest, params: { userId: string }) {
   }
 }
 
-export async function POST(request: NextRequest, params: { userId: string }) {
+export async function POST(request: NextRequest, params: { userid: string }) {
   try {
     await dbConnect();
-    const userId = params.userId;
+    const userid = params.userid;
     const { title, description } = await request.json();
 
     const newTodo = new Todo({
-      userName: userId,
+      userName: userid,
       TodoTitle: title,
       TodoDescription: description,
       completed: false,
@@ -47,10 +47,10 @@ export async function POST(request: NextRequest, params: { userId: string }) {
   }
 }
 
-export async function PATCH(request: NextRequest, params: { userId: string }) {
+export async function PATCH(request: NextRequest, params: { userid: string }) {
   try {
     await dbConnect();
-    const userId = params.userId;
+    const userid = params.userid;
     const { id, title, description, completed } = await request.json();
 
     const updatedTodo = await Todo.findByIdAndUpdate(
@@ -72,10 +72,10 @@ export async function PATCH(request: NextRequest, params: { userId: string }) {
   }
 }
 
-export async function DELETE(request: NextRequest, params: { userId: string }) {
+export async function DELETE(request: NextRequest, params: { userid: string }) {
   try {
     await dbConnect();
-    const userId = params.userId;
+    const userid = params.userid;
     const { id } = await request.json();
     const userTodos = await Todo.findByIdAndDelete({ _id: id });
 
