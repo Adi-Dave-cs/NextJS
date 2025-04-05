@@ -2,7 +2,13 @@ import Todo from '@/models/todo';
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 
-export async function GET(request: NextRequest, context:{ params: {userid : string}}) {
+type Param = {
+  params: {
+    userid: string;
+  };
+};
+
+export async function GET(request: NextRequest, context:Param) {
   try {
     await dbConnect();
     const userid = context.params.userid;
@@ -22,7 +28,7 @@ export async function GET(request: NextRequest, context:{ params: {userid : stri
   }
 }
 
-export async function POST(request: NextRequest, context:{ params: {userid : string}}) {
+export async function POST(request: NextRequest, context:Param) {
   try {
     await dbConnect();
     const userid = context.params.userid;
@@ -47,7 +53,7 @@ export async function POST(request: NextRequest, context:{ params: {userid : str
   }
 }
 
-export async function PATCH(request: NextRequest, context:{ params: {userid : string}}) {
+export async function PATCH(request: NextRequest, context:Param) {
   try {
     await dbConnect();
     const userid = context.params.userid;
@@ -72,7 +78,7 @@ export async function PATCH(request: NextRequest, context:{ params: {userid : st
   }
 }
 
-export async function DELETE(request: NextRequest, context:{ params: {userid : string}}) {
+export async function DELETE(request: NextRequest, context:Param) {
   try {
     await dbConnect();
     const userid = context.params.userid;
