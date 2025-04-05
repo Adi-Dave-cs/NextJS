@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@source "./public/*.{html,js,jsx,tsx}";
+@plugin "daisyui" {
+  themes: "light", "dark", "cupcake", "synthwave", "cyberpunk", "forest", "aqua",
+    "luxury", "lemonade", "nord", "sunset";
+}
