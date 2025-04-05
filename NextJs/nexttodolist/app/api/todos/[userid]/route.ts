@@ -3,15 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 
 type Param = {
-  params: {
+  params: Promise<{
     userid: string;
-  };
+  }>;
 };
 
 export async function GET(request: NextRequest, context:Param) {
   try {
     await dbConnect();
-    const userid = context.params.userid;
+    const userProvider = await context.params;
+    const userid = userProvider.userid;
 
     const userTodos = await Todo.find({ userName: userid });
 
@@ -31,7 +32,9 @@ export async function GET(request: NextRequest, context:Param) {
 export async function POST(request: NextRequest, context:Param) {
   try {
     await dbConnect();
-    const userid = context.params.userid;
+    const userProvider = await context.params;
+    const userid = userProvider.userid;
+
     const { title, description } = await request.json();
 
     const newTodo = new Todo({
@@ -56,7 +59,8 @@ export async function POST(request: NextRequest, context:Param) {
 export async function PATCH(request: NextRequest, context:Param) {
   try {
     await dbConnect();
-    const userid = context.params.userid;
+    const userProvider = await context.params;
+    const userid = userProvider.userid;
     const { id, title, description, completed } = await request.json();
 
     const updatedTodo = await Todo.findByIdAndUpdate(
@@ -81,7 +85,8 @@ export async function PATCH(request: NextRequest, context:Param) {
 export async function DELETE(request: NextRequest, context:Param) {
   try {
     await dbConnect();
-    const userid = context.params.userid;
+    const userProvider = await context.params;
+    const userid = userProvider.userid;
     const { id } = await request.json();
     const userTodos = await Todo.findByIdAndDelete({ _id: id });
 
