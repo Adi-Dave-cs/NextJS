@@ -2,10 +2,10 @@ import Todo from '@/models/todo';
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 
-export async function GET(request: NextRequest, params: { userid: string }) {
+export async function GET(request: NextRequest, { params }:{ params: {userid : string}}) {
   try {
     await dbConnect();
-    const userid = params.userid;
+    const { userid} = params;
 
     const userTodos = await Todo.find({ userName: userid });
 
@@ -22,10 +22,10 @@ export async function GET(request: NextRequest, params: { userid: string }) {
   }
 }
 
-export async function POST(request: NextRequest, params: { userid: string }) {
+export async function POST(request: NextRequest, { params }:{ params: {userid : string}}) {
   try {
     await dbConnect();
-    const userid = params.userid;
+    const { userid} = params;
     const { title, description } = await request.json();
 
     const newTodo = new Todo({
@@ -47,10 +47,10 @@ export async function POST(request: NextRequest, params: { userid: string }) {
   }
 }
 
-export async function PATCH(request: NextRequest, params: { userid: string }) {
+export async function PATCH(request: NextRequest, { params }:{ params: {userid : string}}) {
   try {
     await dbConnect();
-    const userid = params.userid;
+    const { userid} = params;
     const { id, title, description, completed } = await request.json();
 
     const updatedTodo = await Todo.findByIdAndUpdate(
@@ -72,10 +72,10 @@ export async function PATCH(request: NextRequest, params: { userid: string }) {
   }
 }
 
-export async function DELETE(request: NextRequest, params: { userid: string }) {
+export async function DELETE(request: NextRequest, { params }:{ params: {userid : string}}) {
   try {
     await dbConnect();
-    const userid = params.userid;
+    const { userid} = params;
     const { id } = await request.json();
     const userTodos = await Todo.findByIdAndDelete({ _id: id });
 
