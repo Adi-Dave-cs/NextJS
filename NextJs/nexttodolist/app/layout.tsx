@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-base-300 w-full h-full"  cz-shortcut-listen="true">
+      <body className="bg-base-300 w-full h-full scroll-smooth"  cz-shortcut-listen="true">
         <ThemeProvider/>
       <div className="navbar bg-base-100 shadow-md">
         <div className="flex-1">
