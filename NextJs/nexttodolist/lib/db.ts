@@ -1,31 +1,28 @@
+// lib/db.ts
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI as string;
+const MONGODB_URI = process.env.MONGODB_URI!;
 
 if (!MONGODB_URI) {
-  throw new Error('Please define MONGODB_URI in your .env file');
+  throw new Error('❌ MONGODB_URI is not defined in .env.local');
 }
 
-const options = {
-  dbName: process.env.MONGO_DB,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+let isConnected = false;
 
-// Prevent multiple connections in development
-let cached = (global as any).mongoose || { conn: null, promise: null };
-
-async function dbConnect() {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(MONGODB_URI, options)
-      .then((mongoose) => mongoose);
+export default async function dbConnect() {
+  if (isConnected) {
+    return;
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
+  try {
+    const db = await mongoose.connect(MONGODB_URI, {
+      dbName: 'userTodoDatabase', // Optional if it's already in the URI
+    });
 
-export default dbConnect;
+    isConnected = db.connections[0].readyState === 1;
+    console.log('✅ MongoDB connected');
+  } catch (err) {
+    console.error('❌ MongoDB connection error:', err);
+    throw err;
+  }
+}

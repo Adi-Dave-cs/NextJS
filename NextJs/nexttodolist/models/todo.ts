@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Collection } from 'mongoose';
 
 export interface ITodo extends Document {
   completed: boolean;
@@ -12,7 +12,8 @@ const UserTodoSchema = new Schema<ITodo>({
   completed: { type: Boolean, default: false },
   TodoDescription: { type: String, default: '' },
   TodoTitle: { type: String, required: true },
-});
+},
+{collection : 'userTodoDb'});
 
 export default mongoose.models.Todo ||
-  mongoose.model<ITodo>('Todo', UserTodoSchema, process.env.MONGO_TODO_TABLE);
+  mongoose.model<ITodo>('Todo', UserTodoSchema);
