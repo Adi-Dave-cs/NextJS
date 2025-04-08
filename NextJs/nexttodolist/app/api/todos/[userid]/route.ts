@@ -1,4 +1,4 @@
-import Todo from '@/models/Yodo';
+import Todo from '@/models/Todo';
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 
