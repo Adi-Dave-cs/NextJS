@@ -5,9 +5,9 @@ export async function userExists(uName: string) {
   try {
     await dbConnect();
 
-    const user = await User.findOne({userName: uName});
-    if (!user) return false;
-    return true;
+    const user = await User.findOne({userEmail: uName});
+    if (!user) return null;
+    return user;
   } catch (err) {
     console.log('Error in connection of db : ', err);
   }

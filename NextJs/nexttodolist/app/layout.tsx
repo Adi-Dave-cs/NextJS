@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import "./globals_postprocess.css"
-import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
-import ThemeToggle from "@/components/ThemeProvider/ThemeToggler";
+
+
 
 
 export const metadata: Metadata = {
@@ -19,23 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-base-300 w-full h-full scroll-smooth"  cz-shortcut-listen="true">
-        <ThemeProvider/>
-      <div className="navbar bg-base-100 shadow-md">
-        <div className="flex-1">
-          <Link href="./" className="mx-2 max-md:text-xl text-4xl font-extrabold">NextTodoList</Link>
-        </div>
-        <div>
-          <ThemeToggle/>
-        </div>
-        <div>
-          <Link href='/signin'>
-          <button className="btn btn-success btn-block rounded-lg " >
-            <p className="min-md:text-2xl max-md:text-xl">Get In!</p> 
-            </button>
-          </Link>
-        </div>
-        
-      </div>
+      
         {children}
       </body>
     </html>

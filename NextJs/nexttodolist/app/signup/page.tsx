@@ -128,9 +128,6 @@ export default function signup() {
                       {error.confirmPasswordError}
                     </p>
                   )}
-                  <div>
-                    <a className="link link-hover">Forgot password?</a>
-                  </div>
                   <button type="submit" className="btn btn-success mt-4">
                     signup
                   </button>

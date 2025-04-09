@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import TodoComponent from '@/components/TodoComponent/TodoComponentExample';
 import Pricing from '@/components/Pricing/Pricing';
+import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
+import ThemeToggle from "@/components/ThemeProvider/ThemeToggler";
+
 
 export default function Home() {
 
@@ -11,7 +14,22 @@ export default function Home() {
     <div
       className="w-full h-full bg-base-200"
     >
-
+      <ThemeProvider/>
+      <div className="navbar bg-base-100 shadow-md">
+        <div className="flex-1">
+          <Link href="./" className="mx-2 max-md:text-xl text-4xl font-extrabold">NextTodoList</Link>
+        </div>
+        <div>
+          <ThemeToggle/>
+        </div>
+        <div>
+          <Link href='/signin'>
+          <button className="btn btn-success btn-block rounded-lg " >
+            <p className="min-md:text-2xl max-md:text-xl">Get In!</p> 
+            </button>
+          </Link>
+        </div>
+      </div>
       <div className="bg-base-300 w-full h-max px-8 py-8 ">
         <p className="min-md:text-4xl max-md:text-2xl text-center font-extrabold capitalize">
           <span className="opacity-70">All your </span>

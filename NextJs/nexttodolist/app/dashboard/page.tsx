@@ -1,4 +1,8 @@
-export default function Dashboard()
+import { getCurrentUser } from "@/lib/userAction";
+
+
+export default async function Dashboard()
 {
-    return <><h1 className="text-6xl text-pretty text-primary">hi welcome to dashboard!</h1></>
+    const user = await getCurrentUser();
+    return <><h1 className="text-6xl text-pretty text-primary">hi {user?.uName} welcome to dashboard!</h1></>
 }
