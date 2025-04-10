@@ -10,7 +10,7 @@ type formData = {
   password: string;
 };
 
-export default function signin() {
+export default function Signin() {
   const rt = useRouter();
   
   const [fData, setFData] = useState<formData>({
