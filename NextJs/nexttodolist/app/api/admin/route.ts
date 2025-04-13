@@ -10,7 +10,7 @@ type Param = {
   }>;
 };
 
-export async function GET(request: NextRequest, context:Param) {
+export async function GET(request: NextRequest) {
   try {
     await dbConnect();
     const users = await User.find();

@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@/lib/userAction";
 import UserComponent from "@/components/UserComponent/UserComponent";
 
 
