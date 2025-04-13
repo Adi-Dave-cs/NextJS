@@ -22,7 +22,7 @@ export type Cookies = {
     options : {
         secure ?: boolean;
         httpOnly?:boolean;
-        sameSite?:'lax'|'strict';
+        sameSite?:'none';
         expires?:number;
     }) => void;
     get : (key : string) => {name : string; value:string;} | undefined;
@@ -39,7 +39,7 @@ export function createUserSession(uName:string , role:string ,cookies: Cookies)
 
 export function setcookie(sessionid : string, cookies:Pick<Cookies,'set'>)
 {
-    cookies.set('session_identifier',sessionid,{secure:true,httpOnly:true,sameSite:"lax",expires:Date.now() + (SESSION_EXPIRATION * 1000)})
+    cookies.set('session_identifier',sessionid,{secure:true,httpOnly:true,sameSite:"none",expires:Date.now() + (SESSION_EXPIRATION * 1000)})
 }
 
 export function getUserFromSession(cookies: Pick<Cookies,'get'>)
