@@ -6,7 +6,7 @@ import UserComponent from "@/components/UserComponent/UserComponent";
 export default async function Admin()
 {
     const res = await fetch(`${process.env.HOST_URL}/api/admin/`,{method : 'GET'});
-    const users = res.json();
+    const users = await res.json();
     return <>
     <div className="w-full h-full">
     {
