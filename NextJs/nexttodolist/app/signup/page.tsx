@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 type formData = {
   email: string;
@@ -63,14 +66,14 @@ export default function signup() {
         const userExist = await res.json();
 
         if (res.status == 200) {
-          alert('Signup successful!');
+          toast.success('Signup successful!');
           rt.push('/dashboard');
         } else if(userExist.message === 'User Exists !')
           {
             setError((e)=>({...e, userError:'User already exists!'}));
           }
           else {
-          alert('Signup failed');
+          toast.error('Signup failed');
         }
       } catch (err) {
         console.error('Signup error:', err);

@@ -20,7 +20,9 @@ export async function GET(request: NextRequest, context:Param) {
     if (!userTodos)
       return NextResponse.json('No Todos to be found', { status: 404 });
 
-    return NextResponse.json(userTodos, { status: 200 });
+    const filteredTodos = userTodos.filter(e=>!e.completed);
+
+    return NextResponse.json(filteredTodos, { status: 200 });
   } catch (error) {
     console.error('Error fetching todos:', error);
     return NextResponse.json(
@@ -69,11 +71,17 @@ export async function PATCH(request: NextRequest, context:Param) {
       { title, description, completed },
       { new: true }
     );
+    if (!updatedTodo) {
+      return NextResponse.json(
+        { success: false, message: 'Todo not found' },
+        { status: 404 }
+      );
+    }
 
-    if (!updatedTodo)
-      return NextResponse.json({ error: 'Todo not found' }, { status: 404 });
-
-    return NextResponse.json({ status: 201 });
+    return NextResponse.json(
+      { success: true, data: updatedTodo },
+      { status: 200 } // ✅ correct way to set HTTP status
+    );
   } catch (error) {
     console.error('Error fetching todos:', error);
     return NextResponse.json(

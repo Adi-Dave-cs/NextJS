@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { SyntheticEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 type formData = {
@@ -30,11 +31,11 @@ export default function Signin() {
       const userExist = await res.json();
 
       if (res.status == 200) {
-        alert('Signin successful!');
+        toast.success('Signin successful!');
         rt.push('/dashboard');
       } 
       else {
-        alert('SignIn failed');
+        toast.error('SignIn failed');
       }
     } catch (err) {
       console.error('Signup error:', err);
@@ -49,6 +50,7 @@ export default function Signin() {
 
   return (
     <>
+    <Toaster/>
     <form onSubmit={(e) => submitHandler(e)} method='POST'>
       <div className="bg-base-200 min-h-screen flex justify-center items-center">
         <div className="flex-col lg:flex-row-reverse">
