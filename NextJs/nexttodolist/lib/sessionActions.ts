@@ -20,6 +20,7 @@ export type Cookies = {
     set : (key : string,
     value : string,
     options : {
+        path?:string;
         secure ?: boolean;
         httpOnly?:boolean;
         sameSite?:'none';
@@ -38,7 +39,7 @@ export function createUserSession(uName:string , role:string ,cookies: Cookies)
 
 export function setcookie(sessionid : string, cookies:Pick<Cookies,'set'>)
 {
-    cookies.set('session_identifier',sessionid,{secure:true,httpOnly:true,sameSite:"none",expires:Date.now() + (SESSION_EXPIRATION * 1000)})
+    cookies.set('session_identifier',sessionid,{path:'/',secure:true,httpOnly:true,sameSite:"none",expires:Date.now() + (SESSION_EXPIRATION * 1000)})
 }
 
 export function getUserFromSession(sessionid : string)
