@@ -24,8 +24,11 @@ async function middlewareAuth(request: NextRequest) {
   if (privateRoutes.includes(request.nextUrl.pathname)) {
     const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
     const user = await getUserFromSession(sessionId);
-    // console.log(request.cookies);
-    console.log("Middleware triggered : ",user);
+    if(process.env.LOGGER_ENABLED)
+    {
+      console.log(request.cookies);
+      console.log("Middleware triggered : ",user);
+    }
     if (user == null) {
       return NextResponse.redirect(new URL("/signin", request.url))
     }

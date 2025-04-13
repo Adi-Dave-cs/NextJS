@@ -51,7 +51,8 @@ export async function getUserSessionByid(sessionid : string)
 {
     const rawUser = await redisClient.get(`session:${sessionid}`);
     if(isValidSession(rawUser)) return rawUser;
-    console.log("RawUser",rawUser);
+    if(process.env.LOGGER_ENABLED)
+      console.log("RawUser",rawUser);
     return null;
 }
 

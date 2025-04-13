@@ -40,8 +40,6 @@ export default function TodoComponent({id,userName,title, description} : {userNa
             },
             body: JSON.stringify({id:id,title:title,description:description,userName:userName,completed:true}),
         });
-
-        // console.log(updatedTodo.json());
         
         if(updatedTodo.status == 200)
         {
