@@ -41,10 +41,9 @@ export function setcookie(sessionid : string, cookies:Pick<Cookies,'set'>)
     cookies.set('session_identifier',sessionid,{secure:true,httpOnly:true,sameSite:"none",expires:Date.now() + (SESSION_EXPIRATION * 1000)})
 }
 
-export function getUserFromSession(cookies: Pick<Cookies,'get'>)
+export function getUserFromSession(sessionid : string)
 {
-    const sessionid = cookies.get('session_identifier')?.value;
-    if(!sessionid) return null;
+    if(!sessionid || sessionid == 'unknown') return null;
     return getUserSessionByid(sessionid);
 }
 
@@ -52,7 +51,7 @@ export async function getUserSessionByid(sessionid : string)
 {
     const rawUser = await redisClient.get(`session:${sessionid}`);
     if(isValidSession(rawUser)) return rawUser;
-    console.log("RawUser",rawUser);
+    // console.log("RawUser",rawUser);
     return null;
 }
 

@@ -22,16 +22,18 @@ export async function middleware(request: NextRequest) {
 
 async function middlewareAuth(request: NextRequest) {
   if (privateRoutes.includes(request.nextUrl.pathname)) {
-    const user = await getUserFromSession(request.cookies)
-    console.log(request.cookies);
-    console.log("Middleware triggered : ",user);
+    const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
+    const user = await getUserFromSession(sessionId);
+    // console.log(request.cookies);
+    // console.log("Middleware triggered : ",user);
     if (user == null) {
       return NextResponse.redirect(new URL("/signin", request.url))
     }
   }
 
   if (adminRoutes.includes(request.nextUrl.pathname)) {
-    const user = await getUserFromSession(request.cookies)
+    const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
+    const user = await getUserFromSession(sessionId)
     if (user == null) {
       return NextResponse.redirect(new URL("/signin", request.url))
     }
