@@ -33,7 +33,6 @@ export function createUserSession(uName:string , role:string ,cookies: Cookies)
 {
     const sessionid= crypto.randomBytes(256).toString("hex").normalize();
     redisClient.set(`session:${sessionid}`,{uName,role},{ex: SESSION_EXPIRATION});
-    console.log('Session created : ',sessionid);
     setcookie(sessionid,cookies);
 }
 
@@ -46,14 +45,14 @@ export function getUserFromSession(cookies: Pick<Cookies,'get'>)
 {
     const sessionid = cookies.get('session_identifier')?.value;
     if(!sessionid) return null;
-
+    console.log('Session ',sessionid);
     return getUserSessionByid(sessionid);
 }
 
 export async function getUserSessionByid(sessionid : string)
 {
     const rawUser = await redisClient.get(`session:${sessionid}`);
-
+    console.log("RawUser",rawUser);
     if(isValidSession(rawUser)) return rawUser;
     return null;
 }
