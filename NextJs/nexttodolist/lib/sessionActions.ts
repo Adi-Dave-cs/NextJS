@@ -30,10 +30,10 @@ export type Cookies = {
     delete : (key : string)=> void;
 }
 
-export function createUserSession(uName:string , role:string ,cookies: Cookies)
+export async function createUserSession(uName:string , role:string ,cookies: Cookies)
 {
     const sessionid= crypto.randomBytes(256).toString("hex").normalize();
-    redisClient.set(`session:${sessionid}`,{uName,role},{ex: SESSION_EXPIRATION});
+    await redisClient.set(`session:${sessionid}`,{uName,role},{ex: SESSION_EXPIRATION});
     setcookie(sessionid,cookies);
 }
 
