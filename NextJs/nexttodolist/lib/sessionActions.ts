@@ -33,7 +33,7 @@ export function createUserSession(uName:string , role:string ,cookies: Cookies)
 {
     const sessionid= crypto.randomBytes(256).toString("hex").normalize();
     redisClient.set(`session:${sessionid}`,{uName,role},{ex: SESSION_EXPIRATION});
-
+    console.log('Session created : ',sessionid);
     setcookie(sessionid,cookies);
 }
 
