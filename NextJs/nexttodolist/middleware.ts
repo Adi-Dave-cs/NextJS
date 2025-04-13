@@ -4,8 +4,8 @@ import {
   updateUserSessionExpiration,
 } from "@/lib/sessionActions"
 
-const privateRoutes = ["/dashboard","/api/:path*","/admin"]
-const adminRoutes = ["/admin","/api/admin"]
+const privateRoutes = ["/dashboard","/api/:path*"]
+const adminRoutes = ["*/admin"]
 
 export async function middleware(request: NextRequest) {
   const response = (await middlewareAuth(request)) ?? NextResponse.next()
@@ -38,7 +38,7 @@ async function middlewareAuth(request: NextRequest) {
   if (adminRoutes.includes(request.nextUrl.pathname)) {
     const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
     const user = await getUserFromSession(sessionId);
-    console.log("Entered admin api");
+    console.log("Entered admin api :  ",user);
     if (user == null) {
       return NextResponse.redirect(new URL("/signin", request.url));
     }
