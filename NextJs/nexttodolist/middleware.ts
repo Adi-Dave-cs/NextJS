@@ -22,6 +22,7 @@ export async function middleware(request: NextRequest) {
 
 async function middlewareAuth(request: NextRequest) {
   if (privateRoutes.includes(request.nextUrl.pathname)) {
+    console.log('Middleware triggered');
     const user = await getUserFromSession(request.cookies)
     if (user == null) {
       return NextResponse.redirect(new URL("/signin", request.url))
