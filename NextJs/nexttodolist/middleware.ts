@@ -4,8 +4,8 @@ import {
   updateUserSessionExpiration,
 } from "@/lib/sessionActions"
 
-const privateRoutes = ["/dashboard"]
-const adminRoutes = ["/admin"]
+const privateRoutes = ["/dashboard","/api/:path*","/admin"]
+const adminRoutes = ["/admin","/api/admin"]
 
 export async function middleware(request: NextRequest) {
   const response = (await middlewareAuth(request)) ?? NextResponse.next()
@@ -21,6 +21,7 @@ export async function middleware(request: NextRequest) {
 }
 
 async function middlewareAuth(request: NextRequest) {
+  
   if (privateRoutes.includes(request.nextUrl.pathname)) {
     const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
     const user = await getUserFromSession(sessionId);
@@ -36,12 +37,17 @@ async function middlewareAuth(request: NextRequest) {
 
   if (adminRoutes.includes(request.nextUrl.pathname)) {
     const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
-    const user = await getUserFromSession(sessionId)
+    const user = await getUserFromSession(sessionId);
+    console.log("Entered admin api");
     if (user == null) {
-      return NextResponse.redirect(new URL("/signin", request.url))
+      return NextResponse.redirect(new URL("/signin", request.url));
     }
     if (user.role !== "admin") {
-      return NextResponse.redirect(new URL("/", request.url))
+      if(process.env.LOGGER_ENABLED)
+        {
+          console.log("Middleware not allowed admin");
+        }
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
   }
 }
