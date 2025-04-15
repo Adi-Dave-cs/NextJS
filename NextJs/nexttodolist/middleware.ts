@@ -5,6 +5,7 @@ import {
 } from "@/lib/sessionActions"
 
 const privateRoutes = ["/dashboard","/api/:path*"]
+const signinRoutes = ['/signin','/signup']
 const adminRoutes = ["*/admin"]
 
 export async function middleware(request: NextRequest) {
@@ -21,10 +22,16 @@ export async function middleware(request: NextRequest) {
 }
 
 async function middlewareAuth(request: NextRequest) {
-  
+  const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
+  const user = await getUserFromSession(sessionId);
+  if(signinRoutes.includes(request.nextUrl.pathname))
+  {
+    if(user) return NextResponse.redirect(new URL('/dashboard',request.url));
+
+    return;
+  }
   if (privateRoutes.includes(request.nextUrl.pathname)) {
-    const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
-    const user = await getUserFromSession(sessionId);
+    
     if(process.env.LOGGER_ENABLED)
     {
       console.log(request.cookies);
@@ -36,9 +43,6 @@ async function middlewareAuth(request: NextRequest) {
   }
 
   if (adminRoutes.includes(request.nextUrl.pathname)) {
-    const sessionId = request.cookies.get('session_identifier')?.value ?? 'unknown';
-    const user = await getUserFromSession(sessionId);
-    console.log("Entered admin api :  ",user);
     if (user == null) {
       return NextResponse.redirect(new URL("/signin", request.url));
     }
