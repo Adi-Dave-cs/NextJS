@@ -72,7 +72,7 @@ export default function Signin() {
 
                 />
                 <div>
-                  <a className="link link-hover">Forgot password?</a>
+                  <Link className="link link-hover" href="/forget_password">Forgot password?</Link>
                 </div>
                 <button type="submit" className="btn btn-success mt-4">
                   Login
