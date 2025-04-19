@@ -30,17 +30,17 @@ This project encapsulates the idea of a full-stack todo application. The applica
 - Backend : Typescript, Nodejs, nodemailer (for emails), crypto (for passwords)
 - DB : MongoDB (using ORM : Mongoose)
 
-## Environment Variable
+## Environment Variables
 
-MONGODB_URI=<your-mongodb-url>
-MONGODB_NAME=<name-of-database>
-UPSTASH_REDIS_REST_URL=<upstash-redis-rest-url>
-UPSTASH_REDIS_REST_TOKEN=<upstash-redis-token>
-SESSION_EXPIRATION = 60 \* 40 <Can be changed>
-HOST_URL = http://localhost:3000
-LOGGER_ENABLED=true
-SENDER_EMAIL=<your-email-id>
-GOOGLE_MAIL_PASSWORD = <google-password-for-sending-mails>
+- MONGODB_URI=  your-mongodb-url 
+- MONGODB_NAME= name-of-database
+- UPSTASH_REDIS_REST_URL= upstash-redis-rest-url
+- UPSTASH_REDIS_REST_TOKEN= upstash-redis-token
+- SESSION_EXPIRATION = 60 \* 40 Can be changed
+- HOST_URL = http://localhost:3000
+- LOGGER_ENABLED=true
+- SENDER_EMAIL= your-email-id
+- GOOGLE_MAIL_PASSWORD = google-password-for-sending-mails
 
 ## Future enhancements
 
