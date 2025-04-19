@@ -18,7 +18,37 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## About the Project
+
+This project encapsulates the idea of a full-stack todo application. The application encompasses the functionality of manipulating todos. The app also allows the users to login,signup and also change passwords to ensure that each user can view only their todos.
+
+## Tech-Stack
+
+- Frontend : NextJs , ReactJs, Framer-Motion for animation, tailwind-css , DaisyUi
+- State-management : zustand
+- session management : upstash/redis
+- Backend : Typescript, Nodejs, nodemailer (for emails), crypto (for passwords)
+- DB : MongoDB (using ORM : Mongoose)
+
+## Environment Variable
+
+MONGODB_URI=<your-mongodb-url>
+MONGODB_NAME=<name-of-database>
+UPSTASH_REDIS_REST_URL=<upstash-redis-rest-url>
+UPSTASH_REDIS_REST_TOKEN=<upstash-redis-token>
+SESSION_EXPIRATION = 60 \* 40 <Can be changed>
+HOST_URL = http://localhost:3000
+LOGGER_ENABLED=true
+SENDER_EMAIL=<your-email-id>
+GOOGLE_MAIL_PASSWORD = <google-password-for-sending-mails>
+
+## Future enhancements
+
+As a future enhancement over this we can add two functionalities:
+
+1. Statistics of the completed todos based on the month/year . For the same we need to add routes for the stats and also make changes in the current schema where in we stamp the date of creation and completion.
+2. We can write a cron-job/scheduler to send mails periodically containing a log of incomplete todos.
+3. Optional, for speed we can add connection pooling
 
 ## Learn More
 

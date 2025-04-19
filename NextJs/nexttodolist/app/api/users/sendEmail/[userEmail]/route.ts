@@ -12,7 +12,7 @@ type Param = {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'adityaenterprise1947@gmail.com',
+      user: `${process.env.SENDER_EMAIL}`,
       pass: process.env.GOOGLE_MAIL_PASSWORD, // Your 16-char app password
     },
   });
