@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+Live Demo : [NextTodoApp](https://next-js-omega-brown-38.vercel.app/) visit and try it yourself.
+
 ## Getting Started
 
 First, run the development server:
@@ -32,7 +34,7 @@ This project encapsulates the idea of a full-stack todo application. The applica
 
 ## Environment Variables
 
-- MONGODB_URI=  your-mongodb-url 
+- MONGODB_URI= your-mongodb-url
 - MONGODB_NAME= name-of-database
 - UPSTASH_REDIS_REST_URL= upstash-redis-rest-url
 - UPSTASH_REDIS_REST_TOKEN= upstash-redis-token
